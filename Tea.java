@@ -23,8 +23,7 @@ public class Tea extends CaffeinatedBeverage {
         return super.toString() + "Brew temp: " + getBrewTemp();
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Tea obj) {
+        return super.equals(obj) && this.brewTemp == obj.getBrewTemp();
     }
 }
