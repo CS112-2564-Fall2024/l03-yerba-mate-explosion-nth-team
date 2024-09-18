@@ -10,8 +10,25 @@ public class Tea extends CaffeinatedBeverage {
         setBrewTemp(brewTemp);
     }
 
-    public void setBrewTemp(int brewTemp) {
-        this.brewTemp = brewTemp;
+    public boolean setBrewTemp(int brewTemp) {
+        if (brewTemp >= Integer.MIN_VALUE && brewTemp <= Integer.MAX_VALUE) {
+            this.brewTemp = brewTemp;
+            return true;
+        }
+        else {
+            System.out.println("you turd!");
+            return false;
+        }
+    }
+
+    public boolean setAll(String name, int ounce, double price, int brewTemp) {
+        if (super.setAll(name, ounce, price) & setBrewTemp(brewTemp)) {
+            super.setAll(name, ounce, price);
+            setBrewTemp(brewTemp);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public int getBrewTemp() {
@@ -20,10 +37,19 @@ public class Tea extends CaffeinatedBeverage {
 
     @Override
     public String toString() {
-        return super.toString() + "Brew temp: " + getBrewTemp();
+        return super.toString() + ", Brew temp: " + getBrewTemp() + "\u00B0";
     }
-
-    public boolean equals(Tea obj) {
-        return super.equals(obj) && this.brewTemp == obj.getBrewTemp();
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Tea && super.equals(obj)) {
+            Tea tha = (Tea) obj;
+            if (this.brewTemp == tha.getBrewTemp()) {
+                return true;
+                
+            }
+            return false;
+        }
+        return false;
+       
     }
 }
